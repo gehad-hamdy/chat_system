@@ -1,0 +1,2 @@
+module ApplicationChatsHelper
+end

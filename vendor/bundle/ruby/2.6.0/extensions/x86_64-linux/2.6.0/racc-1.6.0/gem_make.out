@@ -1,0 +1,17 @@
+current directory: /home/gehad/chat_system/vendor/bundle/ruby/2.6.0/gems/racc-1.6.0/ext/racc/cparse
+/home/gehad/.rbenv/versions/2.6.3/bin/ruby -I /home/gehad/.rbenv/versions/2.6.3/lib/ruby/site_ruby/2.6.0 -r ./siteconf20220206-78320-i40km0.rb extconf.rb
+checking for rb_block_call()... yes
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /home/gehad/chat_system/vendor/bundle/ruby/2.6.0/gems/racc-1.6.0/ext/racc/cparse
+make DESTDIR\= clean
+
+current directory: /home/gehad/chat_system/vendor/bundle/ruby/2.6.0/gems/racc-1.6.0/ext/racc/cparse
+make DESTDIR\=
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/gehad/chat_system/vendor/bundle/ruby/2.6.0/gems/racc-1.6.0/ext/racc/cparse
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20220206-78320-asl6mt/racc
