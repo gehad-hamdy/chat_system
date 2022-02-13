@@ -4,7 +4,7 @@ require 'sneakers'
 #   ack: true)
  Sneakers.configure(connection: Bunny.new(hostname: "rabbitmq:5672"),
                             share_threads: true,
-                            heartbeat: 10,
+                            heartbeat: 2,
                             exchange: 'sneakers',
                             exchange_type: :direct,
                             timeout_job_after: 60,

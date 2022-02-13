@@ -38,17 +38,17 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
     ports:
       - "9200:9200"
-#    environment:
-#      - discovery.type=single-node
-#    healthcheck:
-#      interval: 30s
-#      timeout: 10s
-#      retries: 120
+    environment:
+      - discovery.type=single-node
+    healthcheck:
+      interval: 30s
+      timeout: 10s
+      retries: 120
 
   rabbitmq:
     image: rabbitmq:3.7-management-alpine
     hostname: rabbitmq
-#    restart: on-failure
+    restart: on-failure
     volumes:
       - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
       - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
@@ -64,6 +64,7 @@ services:
       - '6379:6379'
     volumes:
       - 'redis:/data'
+
 volumes:
   redis:
   mysql:
