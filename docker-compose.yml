@@ -4,6 +4,8 @@ services:
   db_mysql:
     image: mysql:5.7
     hostname: mysql
+    volumes:
+      - 'mysql:/var/lib/mysql/data'
     ports:
       - "3305:3306"
     environment:
@@ -13,6 +15,7 @@ services:
   application:
     build: .
     hostname: rails
+    restart: always
     command: /entrypoint.sh
     ports:
       - "3000:3000"
@@ -20,6 +23,7 @@ services:
     depends_on:
       - db_mysql
       - elasticsearch
+      - redis
     volumes:
       - .:/chat_system
     tty: true
@@ -28,6 +32,7 @@ services:
       WAIT_HOSTS: db_mysql:3305, elasticsearch:9200, rabbitmq:5672
       APPLICATION_PORT: 3000
       DEBUGGING_PORT: 1234
+      RAILS_LOG_TO_STDOUT: enabled
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
@@ -35,6 +40,10 @@ services:
       - "9200:9200"
 #    environment:
 #      - discovery.type=single-node
+#    healthcheck:
+#      interval: 30s
+#      timeout: 10s
+#      retries: 120
 
   rabbitmq:
     image: rabbitmq:3.7-management-alpine
@@ -46,3 +55,15 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  redis:
+    image: 'redis:5-alpine'
+    hostname: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
+volumes:
+  redis:
+  mysql:

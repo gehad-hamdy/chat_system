@@ -29,6 +29,12 @@ gem 'elasticsearch-model', '~> 6.0.0'
 
 gem 'bunny', '>= 2.14.1'
 gem 'sneakers', '~> 2.11.0'
+
+gem 'redis' # A Ruby client library for Redis
+gem 'redis-store'
+# gem 'redis-namespace'
+gem 'redis-rails'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

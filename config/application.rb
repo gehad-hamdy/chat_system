@@ -31,8 +31,9 @@ module ChatSystem
     config.api_only = true
 
     #add logger conf
-    Rails.logger = Logger.new(STDOUT)
-    config.logger = ActiveSupport::Logger.new("log/#{Rails.env}.log")
-    Rails.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.log_tags  = [:subdomain, :uuid]
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 end

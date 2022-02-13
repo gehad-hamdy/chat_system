@@ -4,14 +4,23 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = Application.find
     render json: {data: @applications}, only: [:name]
   end
 
   # GET /applications/1
   def show
     verify_application_token or return
-    @application = Application.find(params[:id])
+
+    $redis = Redis.current
+    key = "application_show_" + "#{params[:application_token]}/"
+    if $redis.exists(key) != 0
+      @application = JSON.parse($redis.get(key))
+    else
+      @application = Application.find(params[:id])
+      $redis.set(key, @application.to_json)
+    end
+
     if @application
       render json: {data: @application, notice: 'fetch successfully'}, status: :ok
     else

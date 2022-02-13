@@ -1,6 +1,6 @@
 #!/bin/sh
 # wait until MySQL is really available
-max_counter=5
+max_counter=20
 counter=1
 while ! mysql --protocol TCP -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "show databases;" > /dev/null 2>&1; do
     sleep 1
